@@ -124,9 +124,9 @@ for itide=1:Ntides
   disp('Convert to tidal ellipse parameters...')
   [major,eccentricity,inclination,phase]=ap2ep(uamp,upha,vamp,vpha);
   ncfrc{'tide_Cmin'}(itide,:,:)=major.*eccentricity.*rmask;
-  ncfrc{'tide_Cmax'}(itide,:,:)=major.*rmask;
-  ncfrc{'tide_Cangle'}(itide,:,:)=inclination.*rmask;
-  ncfrc{'tide_Cphase'}(itide,:,:)=phase.*rmask;
+  ncfrc{'tide_Cmax'}(itide,:,:)=major;
+  ncfrc{'tide_Cangle'}(itide,:,:)=inclination;
+  ncfrc{'tide_Cphase'}(itide,:,:)=phase;
 
   if pot_tides,
 %
@@ -166,8 +166,8 @@ for itide=1:Ntides
 %
 % Write tidal potential into file
 %
-   ncfrc{'tide_Pamp'}(itide,:,:)=Pamp.*rmask;
-   ncfrc{'tide_Pphase'}(itide,:,:)=Ppha.*rmask;
+   ncfrc{'tide_Pamp'}(itide,:,:)=Pamp;
+   ncfrc{'tide_Pphase'}(itide,:,:)=Ppha;
 
   end % <-- if pot_tides
 %

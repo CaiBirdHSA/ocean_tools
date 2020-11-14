@@ -1,6 +1,6 @@
 function create_climfile(clmname,grdname,title,...
                          theta_s,theta_b,hc,N,...
-                         time,cycle,clobber,vtransform);
+                         time,cycle,clobber,vtransform)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % function create_climfile(clmname,grdname,title,...
@@ -26,33 +26,8 @@ function create_climfile(clmname,grdname,title,...
 %   cycle        Length (days) for cycling the climatology.(Real)
 %   clobber      Switch to allow or not writing over an existing 
 %                file.(character string)
-%
 %   Output
-%
 %   nc       Output netcdf object.
-% 
-%  Further Information:  
-%  http://www.croco-ocean.org
-%  
-%  This file is part of CROCOTOOLS
-%
-%  CROCOTOOLS is free software; you can redistribute it and/or modify
-%  it under the terms of the GNU General Public License as published
-%  by the Free Software Foundation; either version 2 of the License,
-%  or (at your option) any later version.
-%
-%  CROCOTOOLS is distributed in the hope that it will be useful, but
-%  WITHOUT ANY WARRANTY; without even the implied warranty of
-%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-%  GNU General Public License for more details.
-%
-%  You should have received a copy of the GNU General Public License
-%  along with this program; if not, write to the Free Software
-%  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
-%  MA  02111-1307  USA
-%
-%  Copyright (c) 2001-2006 by Pierrick Penven 
-%  e-mail:Pierrick.Penven@ird.fr  
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp(' ')
@@ -87,6 +62,8 @@ Np=N+1;
 %
 type = 'CLIMATOLOGY file' ; 
 history = 'CROCO' ;
+ncid=netcdf.create(clmname,'64BIT_OFFSET');
+netcdf.close(ncid);
 nc = netcdf(clmname,clobber);
 % result = redef(nc);
 %

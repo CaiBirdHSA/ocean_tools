@@ -138,6 +138,7 @@ grdname  = [CROCO_files_dir,'roms_grid.nc'];
 frcname  = [CROCO_files_dir,'roms_frc.nc'];
 blkname  = [CROCO_files_dir,'roms_blk.nc'];
 clmname  = [CROCO_files_dir,'roms_clm.nc'];
+tidname  = [CROCO_files_dir,'roms_tide.nc'];
 
 bryname  = [CROCO_files_dir,'roms_bry.nc'];
 ininame  = [CROCO_files_dir,'roms_ini.nc'];

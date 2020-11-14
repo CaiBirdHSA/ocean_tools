@@ -1,37 +1,34 @@
-function nc_add_tides(fname,Ntides,start_tide_mjd,components)
+function nc_add_tides(tidname,grdname,Ntides,start_tide_mjd,components)
 %
-%  Further Information:  
-%  http://www.croco-ocean.org
-%  
-%  This file is part of CROCOTOOLS
+nc = netcdf(grdname, 'nowrite');
+maskr=nc{'mask_rho'}(:);
+Lp=length(nc('xi_rho'));
+Mp=length(nc('eta_rho'));
+close(nc);
 %
-%  CROCOTOOLS is free software; you can redistribute it and/or modify
-%  it under the terms of the GNU General Public License as published
-%  by the Free Software Foundation; either version 2 of the License,
-%  or (at your option) any later version.
+type = 'TIDE file' ; 
+ncid=netcdf.create(tidname,'64BIT_OFFSET');
+netcdf.close(ncid);
+nc = netcdf(tidname,'clobber');
 %
-%  CROCOTOOLS is distributed in the hope that it will be useful, but
-%  WITHOUT ANY WARRANTY; without even the implied warranty of
-%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-%  GNU General Public License for more details.
-%
-%  You should have received a copy of the GNU General Public License
-%  along with this program; if not, write to the Free Software
-%  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
-%  MA  02111-1307  USA
-%
-%  Copyright (c) 2001-2006 by Patrick Marchesiello
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-nc=netcdf(fname,'write');
 %%redef(nc);		% for Octave compatibility
 %
 %  Add dimension
 %
+nc('xi_rho') = Lp;
+nc('eta_rho') = Mp;
 nc('tide_period')=Ntides;
 %
 %  Add variables and attributes
 %
+nc{'mask_rho'} = ncdouble('eta_rho', 'xi_rho');
+nc{'mask_rho'}.long_name = ncchar('mask on RHO-points');
+nc{'mask_rho'}.long_name = 'mask on RHO-points';
+nc{'mask_rho'}.option_0 = ncchar('land');
+nc{'mask_rho'}.option_0 = 'land';
+nc{'mask_rho'}.option_1 = ncchar('water');
+nc{'mask_rho'}.option_1 = 'water';
+
 nc{'tide_period'} = ncdouble('tide_period');
 nc{'tide_period'}.long_name = ncchar('Tide angular period');
 nc{'tide_period'}.long_name = 'Tide angular period';
@@ -86,8 +83,12 @@ nc{'tide_Pphase'}.long_name = 'Tidal potential phase angle';
 nc{'tide_Pphase'}.units = ncchar('Degrees');
 nc{'tide_Pphase'}.units = 'Degrees';
 
+nc{'mask_rho'}(:) =  maskr;
 nc.date = ncchar(date);
 nc.date = date;
+nc.type = ncchar(type);
+nc.type = type;
+nc.start_tide_date=mjd2greg(start_tide_mjd);
 nc.start_tide_mjd=start_tide_mjd;
 nc.components = ncchar(components);
 nc.components = components;
