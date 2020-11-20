@@ -15,8 +15,6 @@ Mp=M+1;
 ncid=netcdf.create(frcname,'64BIT_OFFSET');
 netcdf.close(ncid);
 nw = netcdf(frcname,'write');
-%result = redef(nw);
-
 %
 %  Create dimensions
 %

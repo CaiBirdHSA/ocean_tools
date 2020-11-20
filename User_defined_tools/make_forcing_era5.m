@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Create and fill frc and bulk files with era5 data.
+% Create and fill frc and bulk files with GFS data.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -232,31 +232,6 @@ end
 close(nc_frc);
 close(nc_blk);
 close(nc)
-%---------------------------------------------------------------
-% Make a few plots
-%---------------------------------------------------------------
-if makeplot==1
-  disp(' ')
-  disp(' Make a few plots...')
-%   slides=[10 12 14 16]; 
-%   test_forcing(blkname,grdname,'tair',slides,3,coastfileplot)
-%   figure
-%   test_forcing(blkname,grdname,'rhum',slides,3,coastfileplot)
-%   figure
-%   test_forcing(blkname,grdname,'prate',slides,3,coastfileplot)
-%   figure
-%   test_forcing(blkname,grdname,'wspd',slides,3,coastfileplot)
-%   figure
-%   test_forcing(blkname,grdname,'radlw',slides,3,coastfileplot)
-%   figure
-%   test_forcing(blkname,grdname,'radlw_in',slides,3,coastfileplot)
-%   figure
-%   test_forcing(blkname,grdname,'sustr',slides,3,coastfileplot)
-%   figure
-%   test_forcing(blkname,grdname,'svstr',slides,3,coastfileplot)
-%   figure
-%   test_forcing(blkname,grdname,'radsw',slides,3,coastfileplot)
-end
 
 toc
 

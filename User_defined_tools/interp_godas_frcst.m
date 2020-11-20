@@ -23,13 +23,6 @@ nc=netcdf(hycom_name);    %nc1:el
 %
 zeta=ext_data_hycom(nc,hycom_name,lonT,latT,'zeta',tin,lon,lat,1,Roa,interp_method);
 %
-%bottom t,s,u,v
-%
-% s_bot = ext_data_hycom(nc,hycom_name,lonT,latT,'salinity_bottom',tin,lon,lat,1,Roa,interp_method);
-% t_bot = ext_data_hycom(nc,hycom_name,lonT,latT,'water_temp_bottom',tin,lon,lat,1,Roa,interp_method);
-% u_bot = ext_data_hycom(nc,hycom_name,lonT,latT,'water_u_bottom',tin,lon,lat,1,Roa,interp_method);
-% v_bot = ext_data_hycom(nc,hycom_name,lonT,latT,'water_v_bottom',tin,lon,lat,1,Roa,interp_method);
-%
 % Read and extrapole the 3D variables
 %
 NZ=length(Z);
@@ -65,11 +58,6 @@ if ~isempty(nc_clm)
   hc=nc_clm{'hc'}(:);
   N=length(nc_clm('s_rho'));
   vtransform=nc_clm{'Vtransform'}(:);
-    if  ~exist('vtransform')
-        vtransform=1; %Old Vtransform
-        disp([' NO VTRANSFORM parameter found'])
-        disp([' USE TRANSFORM default value vtransform = 1'])
-    end
 end
 if ~isempty(nc_bry)
   theta_s=nc_bry{'theta_s'}(:);
@@ -77,11 +65,6 @@ if ~isempty(nc_bry)
   hc=nc_bry{'hc'}(:);
   N=length(nc_bry('s_rho'));
   vtransform=nc_bry{'Vtransform'}(:);
-    if  ~exist('vtransform')
-        vtransform=1; %Old Vtransform
-        disp([' NO VTRANSFORM parameter found'])
-        disp([' USE TRANSFORM default value vtransform = 1'])
-    end
 end
 zr=zlevs(h,zeta,theta_s,theta_b,hc,N,'r',vtransform);
 zu=rho2u_3d(zr);

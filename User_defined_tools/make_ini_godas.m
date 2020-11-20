@@ -11,6 +11,8 @@ crocotools_param
 %
 hycom_data  = [CROCO_files_dir,'godas_2018-2020.nc'];
 disp([' GODAS_data : ', hycom_data])
+%preprocessing input data
+% deeper_input(hycom_data);
 %
 nc=netcdf(grdname);
 lon=nc{'lon_rho'}(:);
@@ -33,7 +35,7 @@ lonV=nc{'lonUV'}(:);
 latV=nc{'latUV'}(:);
 Z=-nc{'depth'}(:);
 NZ=length(Z);
-levnum=find(-Z>maxh,1,'first')+2;
+levnum=find(-Z>maxh,1,'first')+1;
 NZ=min(levnum,NZ-rmdepth);
 Z=Z(1:NZ);
 hycomtimeunits=nc{'time'}.units(:);
@@ -45,12 +47,12 @@ close(nc)
 initime=time(1);
 initimestr=datestr(datenum(torig)+initime/3600.0/24.0,'yyyymmdd_HH');
 %
-clmdt=4;
+clmdt=1;
 brydt=1;
 bryt0=1;
 clmt0=1;
-makeini =0;
-makebry =1;
+makeini =1;
+makebry =0;
 makeclim=0;
 %
 %%%%%%%%%%%%%%%%%%% END USERS DEFINED VARIABLES %%%%%%%%%%%%%%%%%%%%%%%
@@ -95,7 +97,7 @@ if makeclim==1 || makebry==1
   if makeclim==1
     create_forecast_climfile(clmname,grdname,title,...
                     theta_s,theta_b,hc,N,...
-                    time(1:clmdt:end),time_cycle,timeunits,vtransform);
+                    time(1:clmdt:end),timeunits,vtransform);
     nc_clm=netcdf(clmname,'write');
   else
     nc_clm=[];

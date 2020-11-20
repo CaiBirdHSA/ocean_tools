@@ -1,6 +1,6 @@
 function create_forecast_climfile(clmname,grdname,title,...
                          theta_s,theta_b,hc,N,...
-                         time,cycle,timeunits,vtransform)
+                         time,timeunits,vtransform)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   cycle        Length (days) for cycling the climatology.(Real)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -55,8 +55,6 @@ nc('one') = 1;
 nc{'spherical'} = ncchar('one') ;
 nc{'Vtransform'} = ncint('one') ;
 nc{'Vstretching'} = ncint('one') ;
-nc{'tstart'} = ncdouble('one') ;
-nc{'tend'} = ncdouble('one') ;
 nc{'theta_s'} = ncdouble('one') ;
 nc{'theta_b'} = ncdouble('one') ;
 nc{'Tcline'} = ncdouble('one') ;
@@ -89,16 +87,6 @@ nc{'spherical'}.flag_values = ncchar('T, F');
 nc{'spherical'}.flag_values = 'T, F';
 nc{'spherical'}.flag_meanings = ncchar('spherical Cartesian');
 nc{'spherical'}.flag_meanings = 'spherical Cartesian';
-%
-nc{'tstart'}.long_name = ncchar('start processing day');
-nc{'tstart'}.long_name = 'start processing day';
-nc{'tstart'}.units = ncchar('day');
-nc{'tstart'}.units = 'day';
-%
-nc{'tend'}.long_name = ncchar('end processing day');
-nc{'tend'}.long_name = 'end processing day';
-nc{'tend'}.units = ncchar('day');
-nc{'tend'}.units = 'day';
 %
 nc{'theta_s'}.long_name = ncchar('S-coordinate surface control parameter');
 nc{'theta_s'}.long_name = 'S-coordinate surface control parameter';
@@ -170,9 +158,8 @@ nc{'ocean_time'}.long_name = ncchar('time for climatology');
 nc{'ocean_time'}.long_name = 'time for climatology';
 nc{'ocean_time'}.units = ncchar(timeunits);
 nc{'ocean_time'}.units = timeunits;
-nc{'ocean_time'}.calendar = ncchar('360.0 days in every year');
-nc{'ocean_time'}.calendar = '360.0 days in every year';
-nc{'ocean_time'}.cycle_length = cycle;
+nc{'ocean_time'}.calendar = ncchar('gregorian');
+nc{'ocean_time'}.calendar = 'gregorian';
 %
 nc{'temp'}.long_name = ncchar('potential temperature');
 nc{'temp'}.long_name = 'potential temperature';
@@ -286,8 +273,6 @@ nc.history = history;
 nc{'spherical'}(:)='T';
 nc{'Vtransform'}(:)=vtransform;
 nc{'Vstretching'}(:)=4;
-nc{'tstart'}(:) =  min([min(time) min(time) min(time)]); 
-nc{'tend'}(:) =  max([max(time) max(time) max(time)]); 
 nc{'theta_s'}(:) =  theta_s; 
 nc{'theta_b'}(:) =  theta_b; 
 nc{'Tcline'}(:) =  hc; 
@@ -307,5 +292,3 @@ nc{'temp'}(:) =  0;
 nc{'salt'}(:) =  0; 
 close(nc)
 return
-
-

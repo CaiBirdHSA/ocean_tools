@@ -88,11 +88,21 @@ end
 %
 % Set the default for temperature
 %
-if sum(sum(1-isnan(data)))>8 
-    default=nanmean(nanmean(data));
-    mintempvalue=min(min(data));
+if strcmp(vname,'temp') || strcmp(vname,'temperature') || strcmp(vname,'water_temp') ... 
+          || strcmp(vname,'salt') || strcmp(vname,'salinity') || strcmp(vname,'water_salt')
+
+      if sum(sum(1-isnan(data)))>10
+          default=nanmean(nanmean(data));
+          mintempvalue=default;
+      else
+          default=mintempvalue;
+          disp(['vname is: ', vname]);      
+          disp(['default is: ', num2str(default)]);      
+      end
 else
-    default=mintempvalue;
+    default = 0.0;
+    disp(['vname is: ', vname]);
+    disp(['default is: ', num2str(default)]);
 end
 %
 % Perform the extrapolation

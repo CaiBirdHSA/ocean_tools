@@ -114,7 +114,7 @@ RUN_dir=[pwd,'/'];
 %
 %  CROCO input netcdf files directory
 %
-CROCO_files_dir='../case/scs_2018/';
+CROCO_files_dir='../scs_2018/';
 %
 %  Global data directory (etopo, coads, datasets download from ftp, etc..)
 %
@@ -198,7 +198,7 @@ pathfinder_sst_name=[DATADIR,...
 %
 %  Open boundaries switches (! should be consistent with cppdefs.h !)
 %
-obc = [1 1 0 0]; % open boundaries (1=open , [S E N W])
+obc = [1 1 0 1]; % open boundaries (1=open , [S E N W])
 %
 %  Level of reference for geostrophy calculation
 %
