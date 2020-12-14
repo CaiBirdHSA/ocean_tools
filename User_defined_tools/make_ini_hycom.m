@@ -9,8 +9,9 @@ title='HYCOM';
 %
 crocotools_param
 %
-hycom_data  = [CROCO_files_dir,'hycom_20180101.nc'];
+hycom_data  = [CROCO_files_dir,'hycom_20170819.nc'];
 disp([' hycom_data : ', hycom_data])
+insitu2pot = 1;    %Hycom data is temperature, converted it to potential temperature
 %
 nc=netcdf(grdname);
 lon=nc{'lon_rho'}(:);
@@ -45,13 +46,13 @@ close(nc)
 initime=time(1);
 initimestr=datestr(datenum(torig)+initime/3600.0/24.0,'yyyymmdd_HH');
 %
-clmdt=4;
+clmdt=2;
 brydt=2;
 bryt0=1;
 clmt0=1;
-makeini =1;
+makeini =0;
 makebry =0;
-makeclim=0;
+makeclim=1;
 %
 %%%%%%%%%%%%%%%%%%% END USERS DEFINED VARIABLES %%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -98,7 +99,7 @@ if makeclim==1 || makebry==1
   if makeclim==1
     create_forecast_climfile(clmname,grdname,title,...
                     theta_s,theta_b,hc,N,...
-                    time(1:clmdt:end),time_cycle,timeunits,vtransform);
+                    time(1:clmdt:end),timeunits,vtransform);
     nc_clm=netcdf(clmname,'write');
   else
     nc_clm=[];

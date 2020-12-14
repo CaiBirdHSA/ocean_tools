@@ -88,9 +88,9 @@ Tstr=1+res*tstr;
 Tend=Tstr+res*ndays;
 T =Tend-Tstr+1;
 jul_off = mjd(Yorig,1,1);
-for i=1:T;
+for i=1:T
   time(i)=time0+(i-1)/res-jul_off;
-end;
+end
 %
 % Read CROCO grid
 %

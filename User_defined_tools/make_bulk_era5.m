@@ -1,6 +1,6 @@
 clc;close all;clear all;
-era5name='./scs_era5.nc';
-bulkname='./roms_bulk.nc';
+era5name='./../case/hato/era5_hato.nc';
+bulkname='./../case/hato/roms_bulk.nc';
 xtype= 'NC_FLOAT';
 
 %%read att
@@ -17,11 +17,11 @@ u10  = ncread(era5name,'u10');  %10 metre U wind component,m/s
 v10  = ncread(era5name,'v10');  %10 metre V wind component,m/s
 tcc  = ncread(era5name,'tcc');  %toal cloud cover 1
 t2m  = ncread(era5name,'t2m');  %2 metre temperature, K
-ssr  = ncread(era5name,'ssr');  %surface_net_downward_shortwave_flux, J/m2
+ssr  = ncread(era5name,'msnswrf');  %Mean surface net short-wave radiation flux, W/m2
 sp   = ncread(era5name,'sp');   %surface_air_pressure, Pa
 mtpr = ncread(era5name,'mtpr'); %Mean total precipitation rate, kg/m2/s
 d2m  = ncread(era5name,'d2m');  %2 metre dewpoint temperature, K
-lwrad_down = ncread(era5name,'strd');  %Surface thermal radiation downwards, J/m2
+lwrad_down = ncread(era5name,'msdwlwrf');  %Mean surface downward long-wave radiation flux, W/m2
 
 nlon = length(longitude);
 nlat = length(latitude);
@@ -32,9 +32,8 @@ t2m  = t2m-273.150;  % convert Kelvin to Celsius
 % RH=100*(EXP((17.625*TD)/(243.04+TD))/EXP((17.625*T)/(243.04+T))), TD is dewpoint temperature, T is temperature, both are in Celsius
 rh   = 100*(exp((17.625*(d2m-273.15))./(243.04+(d2m-273.15)))./exp((17.625*t2m)./(243.04+t2m)));
 rh(rh>100.0)=100.d0;
-ssr  = ssr/3600.0;           % convert J/m2 to Watts/m2
 ssr(ssr<0) = 0.0001d0;
-lwrad_down = double(lwrad_down)/3600.0;  % convert J/m2 to Watts/m2
+lwrad_down = double(lwrad_down);  % convert J/m2 to Watts/m2
 
 %%create bulk nc
 ncid = netcdf.create(bulkname,'64BIT_OFFSET');

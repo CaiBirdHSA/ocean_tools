@@ -114,7 +114,7 @@ RUN_dir=[pwd,'/'];
 %
 %  CROCO input netcdf files directory
 %
-CROCO_files_dir='../scs_2018/';
+CROCO_files_dir='../case/hato/';
 %
 %  Global data directory (etopo, coads, datasets download from ftp, etc..)
 %
@@ -134,7 +134,7 @@ end
 %
 % CROCO file names (grid, forcing, bulk, climatology, initial)
 %
-grdname  = [CROCO_files_dir,'roms_grid.nc'];
+grdname  = [CROCO_files_dir,'prd_grid_1km.nc'];
 frcname  = [CROCO_files_dir,'roms_frc.nc'];
 blkname  = [CROCO_files_dir,'roms_blk.nc'];
 clmname  = [CROCO_files_dir,'roms_clm.nc'];
@@ -292,15 +292,15 @@ Z0   =  1;       % Mean depth of tide gauge
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-Yorig         = 2018;          % reference time for vector time
+Yorig         = 2017;          % reference time for vector time
                                % in croco initial and forcing files
 %
-Ymin          = 2018;          % first forcing year
-Ymax          = 2018;          % last  forcing year
-Mmin          =  1;             % first forcing month
-Mmax          =  1;             % last  forcing month
+Ymin          = 2017;          % first forcing year
+Ymax          = 2017;          % last  forcing year
+Mmin          =  8;             % first forcing month
+Mmax          =  8;             % last  forcing month
 %
-Dmin          = 1;             % Day of initialization
+Dmin          = 19;             % Day of initialization
 Hmin          = 0;             % Hour of initialization
 Min_min       = 0;             % Minute of initialization
 Smin          = 0;             % Second of initialization
