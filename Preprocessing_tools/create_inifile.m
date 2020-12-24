@@ -69,7 +69,7 @@ nc('eta_rho') = Mp;
 nc('s_rho') = N;
 nc('s_w') = Np;
 nc('tracer') = 2;
-nc('time') = 0;
+nc('ocean_time') = 0;
 nc('one') = 1;
 %
 %  Create variables
@@ -85,14 +85,14 @@ nc{'Tcline'} = ncdouble('one') ;
 nc{'hc'} = ncdouble('one') ;
 nc{'sc_r'} = ncdouble('s_rho') ;
 nc{'Cs_r'} = ncdouble('s_rho') ;
-nc{'ocean_time'} = ncdouble('time') ;
-nc{'u'} = ncdouble('time','s_rho','eta_u','xi_u') ;
-nc{'v'} = ncdouble('time','s_rho','eta_v','xi_v') ;
-nc{'ubar'} = ncdouble('time','eta_u','xi_u') ;
-nc{'vbar'} = ncdouble('time','eta_v','xi_v') ;
-nc{'zeta'} = ncdouble('time','eta_rho','xi_rho') ;
-nc{'temp'} = ncdouble('time','s_rho','eta_rho','xi_rho') ;
-nc{'salt'} = ncdouble('time','s_rho','eta_rho','xi_rho') ;
+nc{'ocean_time'} = ncdouble('ocean_time') ;
+nc{'u'} = ncdouble('ocean_time','s_rho','eta_u','xi_u') ;
+nc{'v'} = ncdouble('ocean_time','s_rho','eta_v','xi_v') ;
+nc{'ubar'} = ncdouble('ocean_time','eta_u','xi_u') ;
+nc{'vbar'} = ncdouble('ocean_time','eta_v','xi_v') ;
+nc{'zeta'} = ncdouble('ocean_time','eta_rho','xi_rho') ;
+nc{'temp'} = ncdouble('ocean_time','s_rho','eta_rho','xi_rho') ;
+nc{'salt'} = ncdouble('ocean_time','s_rho','eta_rho','xi_rho') ;
 %
 %  Create attributes
 %
@@ -146,10 +146,13 @@ nc{'Cs_r'}.units = 'nondimensional';
 nc{'Cs_r'}.valid_min = -1;
 nc{'Cs_r'}.valid_max = 0;
 %
-nc{'ocean_time'}.long_name = ncchar('seconds since 1980-01-01 00:00:00');
-nc{'ocean_time'}.long_name = 'seconds since 1980-01-01 00:00:00';
-nc{'ocean_time'}.units = ncchar('second');
-nc{'ocean_time'}.units = 'second';
+nc{'ocean_time'}.long_name = ncchar('ROMS initial time');
+nc{'ocean_time'}.long_name = 'ROMS initial time';
+nc{'ocean_time'}.units = ncchar('seconds since 1980-01-01 00:00:00');
+nc{'ocean_time'}.units = 'seconds since 1980-01-01 00:00:00';
+nc{'ocean_time'}.calendar = ncchar('gregorian');
+nc{'ocean_time'}.calendar = 'gregorian';
+nc{'ocean_time'}.field = 'time, scalar, series';
 %
 nc{'u'}.long_name = ncchar('u-momentum component');
 nc{'u'}.long_name = 'u-momentum component';

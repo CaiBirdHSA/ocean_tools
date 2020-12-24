@@ -30,7 +30,7 @@ dl = 1/20;
 %
 % Number of vertical Levels (! should be the same in param.h !)
 %
-N = 25;
+N = 21;
 %
 %  Vertical grid parameters (! should be the same in croco.in !)
 %
@@ -114,7 +114,7 @@ RUN_dir=[pwd,'/'];
 %
 %  CROCO input netcdf files directory
 %
-CROCO_files_dir='../case/hato/';
+CROCO_files_dir='../case/bohai/';
 %
 %  Global data directory (etopo, coads, datasets download from ftp, etc..)
 %
@@ -134,7 +134,7 @@ end
 %
 % CROCO file names (grid, forcing, bulk, climatology, initial)
 %
-grdname  = [CROCO_files_dir,'prd_grid_1km.nc'];
+grdname  = [CROCO_files_dir,'roms_grd.nc'];
 frcname  = [CROCO_files_dir,'roms_frc.nc'];
 blkname  = [CROCO_files_dir,'roms_blk.nc'];
 clmname  = [CROCO_files_dir,'roms_clm.nc'];
@@ -198,7 +198,7 @@ pathfinder_sst_name=[DATADIR,...
 %
 %  Open boundaries switches (! should be consistent with cppdefs.h !)
 %
-obc = [1 1 0 1]; % open boundaries (1=open , [S E N W])
+obc = [0 1 0 0]; % open boundaries (1=open , [S E N W])
 %
 %  Level of reference for geostrophy calculation
 %
@@ -300,7 +300,7 @@ Ymax          = 2017;          % last  forcing year
 Mmin          =  8;             % first forcing month
 Mmax          =  8;             % last  forcing month
 %
-Dmin          = 19;             % Day of initialization
+Dmin          = 20;             % Day of initialization
 Hmin          = 0;             % Hour of initialization
 Min_min       = 0;             % Minute of initialization
 Smin          = 0;             % Second of initialization

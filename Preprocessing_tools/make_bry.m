@@ -92,7 +92,7 @@ if (makeZbry)
 %
   nc=netcdf(temp_ann_data,'r');
   Z=nc{'Z'}(:);
-  kmax=max(find(Z<hmax))-1;
+  kmax=max(find(Z<hmax))+1;
   Z=Z(1:kmax);
   close(nc)
   create_bry_Z(Zbryname,grdname,CROCO_title,obc,...

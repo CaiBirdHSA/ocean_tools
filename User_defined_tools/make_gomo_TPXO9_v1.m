@@ -13,13 +13,13 @@ crocotools_param
 
 %****************Modify to suit*************** 
 % TIDE_START=17967;  %From ROMS *.in file (TIME_REF=-2)
-t0=datenum(2019,8,10);  %TIDE_START in Matlab datenum
+t0=datenum(2017,8,20);  %TIDE_START in Matlab datenum
 lengthSim=8;  %approximate length of model run in days
 % fnGrid='E:\croco_tools\case\hato\prd_grid_1km.nc';
 % fnOut=['.\roms_tide_' datestr(t0,'ddmmmyyyy') '.nc'];
 ROMSnames={'M2','S2','N2','K2','K1','O1','P1','Q1','MM','MF','M4','MN4','MS4','2N2','S1'};
-gomo_tidename = 'E:\croco_tools\case\lekima\tide_bc.nc';
-gomo_gridname = 'E:\croco_tools\case\lekima\LEKIMA.grid.nc';
+gomo_tidename = 'E:\croco_tools\case\hwrf\tide_bc.nc';
+gomo_gridname = 'E:\croco_tools\case\hwrf\FIFTEEN.grid.nc';
 %********************************************
 
 %Do not use existing filename as the number of harmonics may differ, causing untold grief. 
