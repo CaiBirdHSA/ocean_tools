@@ -44,7 +44,7 @@ if (sum(sum(isdata))==0)
   field=zeros(M,L)+default;
   interp_flag=0;
   return
-elseif (sum(sum(isdata))<8) 
+elseif (sum(sum(isdata))<10) 
 %  default=min(field(isdata==1));
   default=mean(field(isdata==1));
   disp(['GET_MISSING_VAL: only ',num2str(sum(sum(isdata))),...
